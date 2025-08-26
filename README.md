@@ -1,141 +1,71 @@
-# 📚 PADI - PDF Digitization Agent for Large Textbooks
+# 📚 PADI — Interactive eBook Platform for *K-Reading Kickstart*
 
-A production-grade, cross-platform PDF digitization tool designed specifically for processing large textbooks (500+ pages) with intelligent batching and context-aware text processing.
+PADI is a production-grade, AI-powered platform for transforming the *K-Reading Kickstart* curriculum (authored by Mohana Iyer) into a fully interactive digital experience.  
 
-## 🚀 Features
+Unlike generic PDF processing tools, **PADI is built specifically for this textbook** and designed to evolve into a subscription-based learning platform for students, parents, and educators.  
 
-- **Cross-Platform Compatibility**: Works seamlessly on Windows, macOS, and Linux
-- **Intelligent Batching**: Configurable batch sizes (default: 30 pages) for optimal processing
-- **Context-Aware Processing**: Fixes hyphenation and page break issues across batch boundaries
-- **Multiple Output Formats**: Markdown, JSON, and extracted images
-- **Production Ready**: Comprehensive error handling, logging, and resource management
-- **Scalable Architecture**: Modular design for easy extension and maintenance
+---
 
-## 🏗️ Project Structure
+## 🚀 Core Roadmap
+
+1. **Digitization (Phase 1)**  
+   - Parse raw textbooks (500+ pages each).  
+   - Output Markdown + JSON + extracted images.  
+   - Support batch OCR + context-aware cleanup for accuracy.  
+
+2. **RAG Backend (Phase 2)**  
+   - Store structured content in vector DB.  
+   - Enable semantic search + question answering.  
+
+3. **Interactive Learning Layer (Phase 3)**  
+   - GPT-powered chatbot for tutoring.  
+   - Auto-generated quizzes, flashcards, and summaries.  
+   - Parent progress reports.  
+
+4. **Platform & Auth (Phase 4)**  
+   - User login, Stripe billing, free vs paid access.  
+   - Interactive web interface (Next.js or React).  
+
+---
+
+## ✨ Features (Planned)
+
+- **Lossless Digitization** → Markdown + JSON + images per batch.  
+- **Context-Aware OCR** → Fixes page breaks, hyphenation, and scanning artifacts.  
+- **Semantic Retrieval** → Vector search across modules/sections.  
+- **AI-Powered Learning** → Quizzes, summaries, interactive Q&A.  
+- **Subscription Ready** → Built for parents, tutors, and schools.  
+
+---
+
+## 📂 Project Structure
 
 ```
 padi/
-├── src/padi/                    # Source code
-│   ├── core/                    # Core PDF processing modules
-│   ├── utils/                   # Cross-platform utilities
-│   ├── models/                  # Pydantic data models
-│   └── cli/                     # Command-line interface
-├── config/                      # Configuration files
-│   ├── default.yaml            # Default settings
-│   ├── windows.yaml            # Windows-specific settings
-│   ├── mac.yaml                # macOS-specific settings
-│   └── linux.yaml              # Linux-specific settings
-├── tests/                       # Test suite
-└── pyproject.toml              # Project configuration
+├── config/              # Configuration files
+│   ├── default.yaml
+│   ├── dev.yaml
+│   └── prod.yaml
+├── outputs/             # Digitization outputs
+│   ├── pages/           # Per-page JSON + images
+│   ├── batches/         # Batch Markdown + JSON
+│   └── logs/            # Logs
+├── src/
+│   └── padi/
+│       ├── cli/         # CLI entrypoint
+│       ├── core/        # Core digitization modules
+│       │   ├── pdf/         # PDF extraction + OCR
+│       │   ├── processing/  # Cleaning + batching
+│       │   └── storage/     # File persistence
+│       ├── models/      # Data models (Page, Batch, Error)
+│       └── utils/       # Logging, config, file ops
+├── tests/               # Unit + integration tests
+├── LICENSE
+├── README.md
+├── pyproject.toml
+└── run_padi.py          # Launcher script
 ```
 
-## 🛠️ Installation
+---
 
-### Prerequisites
-
-- Python 3.11+
-- Tesseract OCR engine
-- Platform-specific dependencies (see below)
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd padi
-   ```
-
-2. **Install dependencies**
-   ```bash
-   uv add "click>=8.1,<9.0" "pathlib2>=2.3,<3.0" "psutil>=5.9,<6.0" "tqdm>=4.66,<5.0" "watchdog>=3.0,<4.0" "python-multipart>=0.0,<1.0" "aiofiles>=23.2,<24.0" "asyncio-throttle>=1.0,<2.0"
-   ```
-
-3. **Install Tesseract**
-   - **Windows**: Download from [UB-Mannheim](https://github.com/UB-Mannheim/tesseract/wiki)
-   - **macOS**: `brew install tesseract`
-   - **Linux**: `sudo apt-get install tesseract-ocr`
-
-## 🚀 Usage
-
-### Basic Usage
-
-```bash
-# Process a PDF with default settings
-python -m padi process textbook.pdf
-
-# Process with custom batch size
-python -m padi process textbook.pdf --batch-size 50
-
-# Process with custom output directory
-python -m padi process textbook.pdf --output-dir ./my_output
-
-# Show system information
-python -m padi info
-```
-
-### Configuration
-
-The tool automatically detects your platform and loads appropriate configuration. You can customize settings by editing the YAML files in the `config/` directory.
-
-## 🔧 Development
-
-### Running Tests
-
-```bash
-# Install pytest if not already installed
-uv add pytest
-
-# Run tests
-python -m pytest tests/
-```
-
-### Project Structure
-
-- **`src/padi/core/`**: Core PDF processing logic
-- **`src/padi/utils/`**: Cross-platform utilities and configuration
-- **`src/padi/models/`**: Data models using Pydantic
-- **`src/padi/cli/`**: Command-line interface using Click
-
-## 📋 Roadmap
-
-### Phase 1.1 (Current)
-- ✅ Project structure and configuration
-- ✅ Cross-platform compatibility
-- 🔄 PDF processing pipeline
-- 🔄 Batch management system
-
-### Phase 2
-- Curriculum mapping
-- Content chunking for RAG
-- Advanced text cleaning
-
-### Phase 3
-- Web interface
-- API endpoints
-- Advanced analytics
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-For issues and questions:
-1. Check the [troubleshooting guide](docs/troubleshooting.md)
-2. Search existing issues
-3. Create a new issue with detailed information
-
-## 🎯 Use Cases
-
-- **Academic Textbooks**: Convert large textbooks to searchable digital format
-- **Research Papers**: Process research collections with consistent formatting
-- **Legal Documents**: Digitize legal libraries with high accuracy
-- **Historical Texts**: Preserve and digitize historical documents
+⚔️ **Blunt truth**: this is not a “universal PDF digitizer.” It’s the engine for an AI-powered, interactive *K-Reading Kickstart* eBook ecosystem.  

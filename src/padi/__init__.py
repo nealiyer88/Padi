@@ -1,6 +1,6 @@
 """PADI - PDF Digitization Agent for Large Textbooks."""
 
-from .cli.main import cli
+from .cli import cli
 
 def main() -> None:
     """Main entry point for PADI."""

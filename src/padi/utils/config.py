@@ -2,7 +2,6 @@
 import yaml
 from pathlib import Path
 from typing import Dict, Any, Optional
-from .platform_utils import get_platform_config
 
 
 class ConfigManager:
@@ -20,10 +19,10 @@ class ConfigManager:
         if default_config:
             self.config.update(default_config)
         
-        # Load platform-specific config and override defaults
-        platform_config = self._load_yaml(get_platform_config())
-        if platform_config:
-            self.config.update(platform_config)
+        # Load environment-specific config and override defaults
+        env_config = self._load_yaml("config/dev.yaml")  # TODO: Make configurable
+        if env_config:
+            self.config.update(env_config)
     
     def _load_yaml(self, file_path: str) -> Optional[Dict[str, Any]]:
         """Load a YAML configuration file."""
@@ -59,7 +58,7 @@ class ConfigManager:
     
     def get_output_directory(self) -> Path:
         """Get the base output directory."""
-        base_dir = self.get('output.base_directory', 'digitized_output')
+        base_dir = self.get('output.base_directory', 'outputs')
         return Path(base_dir)
     
     def get_ocr_confidence_threshold(self) -> float:

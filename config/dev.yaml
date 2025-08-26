@@ -1,0 +1,12 @@
+# Development environment configuration
+# Overrides default.yaml settings
+
+pdf_processing:
+  batch_size: 10  # Smaller batches for faster testing
+  
+logging:
+  level: "DEBUG"
+  format: "console"
+  
+output:
+  base_directory: "outputs/dev"

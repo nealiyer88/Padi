@@ -9,10 +9,11 @@ ocr:
   language: "eng"
   
 output:
-  base_directory: "digitized_output"
+  base_directory: "outputs"
   pages_directory: "pages"
   batches_directory: "batches"
   images_directory: "images"
+  logs_directory: "logs"
   
 logging:
   level: "INFO"

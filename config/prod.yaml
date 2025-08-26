@@ -1,0 +1,12 @@
+# Production environment configuration
+# Overrides default.yaml settings
+
+pdf_processing:
+  batch_size: 50  # Larger batches for production efficiency
+  
+logging:
+  level: "WARNING"
+  format: "json"
+  
+output:
+  base_directory: "outputs/prod"
