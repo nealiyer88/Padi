@@ -1,0 +1,20 @@
+# Default configuration for PADI PDF processor
+pdf_processing:
+  batch_size: 30
+  merge_strategy: "fixed"  # or "chapter"
+  output_format: ["markdown", "json"]
+  
+ocr:
+  confidence_threshold: 0.7
+  language: "eng"
+  
+output:
+  base_directory: "digitized_output"
+  pages_directory: "pages"
+  batches_directory: "batches"
+  images_directory: "images"
+  
+logging:
+  level: "INFO"
+  format: "json"
+  file: "padi.log"
